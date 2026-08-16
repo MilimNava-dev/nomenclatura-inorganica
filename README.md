@@ -1,16 +1,102 @@
-# React + Vite
+# Nomenclatura Inorgànica
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web interactiva per practicar **nomenclatura inorgànica en català** mitjançant exercicis generats aleatòriament.
 
-Currently, two official plugins are available:
+L'objectiu del projecte és oferir una manera senzilla i pràctica d'aprendre i practicar la formulació i nomenclatura de compostos inorgànics.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Característiques
 
-## React Compiler
+* 🧪 Exercicis generats automàticament.
+* 🔀 Mode aleatori amb un 50% de preguntes de **fórmula → nom** i un 50% de **nom → fórmula**.
+* 🎯 Selecció de les categories que es volen practicar.
+* ⚖️ Distribució equilibrada dels tipus d'exercicis.
+* 🔢 Fórmules químiques amb subíndexs.
+* ✅ Correcció automàtica de les respostes.
+* ✍️ Detecció d'errors d'accentuació com a categoria independent.
+* 📊 Resum de resultats al final de cada sessió.
+* 🚫 Evita repetir fórmules durant una mateixa sessió.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🧪 Categories
 
-## Expanding the ESLint configuration
+Actualment es poden practicar les següents categories:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+* **Noms comuns**
+
+  * Metà
+  * Amoníac
+  * Aigua
+  * Borà
+* **Hidrurs**
+* **Òxids**
+
+  * Metalls
+  * No-metalls
+* **Hidròxids**
+* **Àcids hidràcids**
+* **Àcids oxoàcids**
+* **Sals binàries**
+* **Sals ternàries**
+* **Sals ternàries hidrogenades**
+
+## 🛠️ Tecnologies
+
+El projecte està desenvolupat amb:
+
+* [React](https://react.dev/)
+* [Vite](https://vite.dev/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [shadcn/ui](https://ui.shadcn.com/)
+* JavaScript (ES6+)
+
+## 📁 Estructura
+
+```text
+src/
+├── chemistry/
+│   ├── generators/
+│   ├── checkAnswer.js
+│   ├── createBalancedModes.js
+│   ├── createBalancedSubtypes.js
+│   ├── generateCompound.js
+│   └── ...
+│
+├── components/
+│   ├── ui/
+│   ├── Formula.jsx
+│   ├── ModeSelector.jsx
+│   ├── CompoundSelector.jsx
+│   └── PracticeCard.jsx
+│
+├── data/
+│   ├── elements.js
+│   ├── compoundElements.js
+│   ├── polyatomicIons.js
+│   └── ...
+│
+└── App.jsx
+```
+
+La carpeta `chemistry` conté la lògica de generació i correcció dels exercicis, mentre que `data` conté la informació química utilitzada pels generadors.
+
+## 🚀 Instal·lació
+
+Clona el repositori:
+
+```bash
+git clone https://github.com/MilimNava-dev/nomenclatura-inorganica.git
+cd <project-folder>
+```
+
+Instal·la les dependències:
+
+```bash
+npm install
+```
+
+Inicia el servidor de desenvolupament:
+
+```bash
+npm run dev
+```
+
+Després obre l'adreça que indiqui Vite al navegador.
