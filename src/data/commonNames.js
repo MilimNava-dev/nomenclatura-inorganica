@@ -22,4 +22,16 @@ export const commonNames = [
     name: "borà",
     category: "common",
   },
+
+  {
+    formula: "SiH4",
+    name: "silà",
+    category: "common",
+  },
+
+  {
+    formula: "PH3",
+    name: "fosfina",
+    category: "common",
+  },
 ];
