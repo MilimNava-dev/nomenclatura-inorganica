@@ -18,6 +18,8 @@ const negativeStates = {
   Br: -1,
   I: -1,
   S: -2,
+  Se: -2,
+  Te: -2,
 };
 
 export function generateHydracid() {
