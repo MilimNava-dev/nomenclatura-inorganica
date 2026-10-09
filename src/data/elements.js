@@ -64,6 +64,22 @@ export const elements = {
     oxidationStates: [-2, 4, 6],
   },
 
+  Se: {
+    symbol: "Se",
+    name: "seleni",
+    type: "nonmetal",
+    group: 16,
+    oxidationStates: [-2, 4, 6],
+  },
+
+  Te: {
+    symbol: "Te",
+    name: "tel·luri",
+    type: "nonmetal",
+    group: 16,
+    oxidationStates: [-2, 4, 6],
+  },
+
   Cl: {
     symbol: "Cl",
     name: "clor",
@@ -112,6 +128,38 @@ export const elements = {
     type: "metal",
     group: 1,
     oxidationStates: [1],
+  },
+
+  Rb: {
+    symbol: "Rb",
+    name: "rubidi",
+    type: "metal",
+    group: 1,
+    oxidationStates: [1],
+  },
+
+  Cs: {
+    symbol: "Cs",
+    name: "cesi",
+    type: "metal",
+    group: 1,
+    oxidationStates: [1],
+  },
+
+  Be: {
+    symbol: "Be",
+    name: "beril·li",
+    type: "metal",
+    group: 2,
+    oxidationStates: [2],
+  },
+
+  Sr: {
+    symbol: "Sr",
+    name: "estronci",
+    type: "metal",
+    group: 2,
+    oxidationStates: [2],
   },
 
   Mg: {

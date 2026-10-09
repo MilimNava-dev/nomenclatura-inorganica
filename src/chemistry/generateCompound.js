@@ -7,23 +7,14 @@ import { generateHydroxide } from "./generators/hydroxides";
 import { generateBinarySalt } from "./generators/binarySalts";
 import { generateHydracid } from "./generators/hydracids";
 import { generateOxoacid } from "./generators/oxoacids";
-import {
-  generateTernarySalt,
-} from "./generators/ternarySalts";
-import {
-  generateHydrogenatedTernarySalt,
-} from "./generators/hydrogenatedTernarySalts";
+import { generateTernarySalt } from "./generators/ternarySalts";
+import { generateHydrogenatedTernarySalt } from "./generators/hydrogenatedTernarySalts";
 import { generateCommonName } from "./generators/common";
+import { generatePeroxide } from "./generators/peroxides";
 import { randomItem } from "./utils";
 
-export function generateCompound(
-  categories,
-  options = {}
-) {
-  const {
-    oxideSubtype,
-    hydrideSubtype,
-  } = options;
+export function generateCompound(categories, options = {}) {
+  const { oxideSubtype, hydrideSubtype } = options;
 
   const category = randomItem(categories);
 
@@ -32,9 +23,10 @@ export function generateCompound(
       return generateCommonName();
 
     case "oxides":
-      return generateOxide(
-        oxideSubtype
-      );
+      return generateOxide(oxideSubtype);
+
+    case "peroxides":
+      return generatePeroxide();
 
     case "hydrides":
       if (hydrideSubtype === "metal") {
@@ -62,8 +54,6 @@ export function generateCompound(
       return generateHydrogenatedTernarySalt();
 
     default:
-      throw new Error(
-        `No hi ha generador per a: ${category}`
-      );
+      throw new Error(`No hi ha generador per a: ${category}`);
   }
 }

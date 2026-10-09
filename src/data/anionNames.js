@@ -5,4 +5,6 @@ export const binaryAnionNames = {
   I: "iodur",
 
   S: "sulfur",
+  Se: "selenur",
+  Te: "tel·lurur",
 };

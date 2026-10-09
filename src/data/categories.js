@@ -12,6 +12,10 @@ export const categories = [
     label: "Òxids",
   },
   {
+    id: "peroxides",
+    label: "Peròxids",
+  },
+  {
     id: "hydroxides",
     label: "Hidròxids",
   },

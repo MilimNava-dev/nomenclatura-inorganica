@@ -34,6 +34,8 @@ export const binarySaltMetals = [
 
 export const nonMetalHydrides = [
   "S",
+  "Se",
+  "Te",
   "F",
   "Cl",
   "Br",
@@ -68,4 +70,19 @@ export const ternarySaltMetals = [
   "Mn",
   "Co",
   "Ni",
+];
+
+
+export const peroxideMetals = [
+  "H",
+  "Li",
+  "Na",
+  "K",
+  "Rb",
+  "Cs",
+  "Be",
+  "Mg",
+  "Ca",
+  "Sr",
+  "Ba",
 ];

@@ -26,11 +26,14 @@ Actualment es poden practicar les següents categories:
   * Amoníac
   * Aigua
   * Borà
+  * Silà
+  * Fosfina
 * **Hidrurs**
 * **Òxids**
 
   * Metalls
   * No-metalls
+* **Peròxids**
 * **Hidròxids**
 * **Àcids hidràcids**
 * **Àcids oxoàcids**
