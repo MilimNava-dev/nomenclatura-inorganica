@@ -8,6 +8,8 @@ const hydracidNames = {
   Br: "bromhídric",
   I: "iodhídric",
   S: "sulfhídric",
+  Se: "selenhídric",
+  Te: "tel·lurhídric"
 };
 
 const negativeStates = {
