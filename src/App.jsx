@@ -3,13 +3,14 @@ import { useState } from "react";
 import { createBalancedSubtypes } from "@/chemistry/createBalancedSubtypes";
 import { createBalancedModes } from "@/chemistry/createBalancedModes";
 import { generateCompound } from "@/chemistry/generateCompound";
+import { createBalancedCategories } from "@/chemistry/createBalancedCategories";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import ModeSelector from "@/components/ModeSelector";
 import CompoundSelector from "@/components/CompoundSelector";
-import LengthSelector from "@/components/LengthSelector"
+import LengthSelector from "@/components/LengthSelector";
 import PracticeCard from "@/components/PracticeCard";
 
 function App() {
@@ -38,43 +39,64 @@ function App() {
 
   const [exerciseModes, setExerciseModes] = useState([]);
   const [oxideSubtypes, setOxideSubtypes] = useState([]);
+  const [exerciseCategories, setExerciseCategories] = useState([]);
   const [totalExercises, setTotalExercises] = useState(20);
 
   const startPractice = () => {
-    const noCategoriesSelected = selectedCategories.length === 0
-    const numberExercisesInvalid = totalExercises < 1
-    const numberExercisesExcess = totalExercises > 50
-
-    if (noCategoriesSelected) {
+    if (selectedCategories.length === 0) {
       return;
-    } else if (numberExercisesInvalid) {
-      setTotalExercises(1)
-    } else if (numberExercisesExcess) {
-      setTotalExercises(50)
-    } else {
-      setTotalExercises(prev => Math.floor(prev))
     }
+
+    const exerciseCount = Math.min(
+      50,
+      Math.max(1, Math.floor(Number(totalExercises) || 1)),
+    );
+
+    setTotalExercises(exerciseCount);
+
+    // Categories equilibrades per a tota la sessió.
+    const balancedCategories = createBalancedCategories(
+      selectedCategories,
+      exerciseCount,
+    );
+
+    setExerciseCategories(balancedCategories);
 
     const modes =
       mode === "random"
-        ? createBalancedModes(totalExercises)
-        : Array(totalExercises).fill(mode);
+        ? createBalancedModes(exerciseCount)
+        : Array(exerciseCount).fill(mode);
 
     setExerciseModes(modes);
 
-    const subtypes = selectedCategories.includes("oxides")
-      ? createBalancedSubtypes(totalExercises)
-      : [];
+    // Comptem quants exercicis corresponen a òxids.
+    const oxideCount = balancedCategories.filter(
+      (category) => category === "oxides",
+    ).length;
+
+    // Generem subtipus equilibrats només per als òxids.
+    const balancedOxideSubtypes = createBalancedSubtypes(oxideCount);
+
+    // Associem cada subtipus a la posició del seu exercici.
+    // Les altres categories no necessiten cap subtipus.
+    let oxideIndex = 0;
+
+    const subtypes = balancedCategories.map((category) => {
+      if (category !== "oxides") {
+        return undefined;
+      }
+
+      return balancedOxideSubtypes[oxideIndex++];
+    });
 
     setOxideSubtypes(subtypes);
 
     setUsedFormulas([]);
 
-    const subtype = selectedCategories.includes("oxides")
-      ? subtypes[0]
-      : undefined;
+    const subtype = subtypes[0];
 
-    const newExercise = generateCompound(selectedCategories, {
+    // Generem el primer exercici només de la categoria que li correspon.
+    const newExercise = generateCompound([balancedCategories[0]], {
       oxideSubtype: subtype,
     });
 
@@ -88,6 +110,7 @@ function App() {
     setUsedFormulas([newExercise.formula]);
 
     setCurrentExercise(1);
+    setShowResults(false);
     setIsPracticing(true);
   };
 
@@ -102,11 +125,13 @@ function App() {
     if (currentExercise < totalExercises) {
       const nextNumber = currentExercise + 1;
 
-      const subtype = selectedCategories.includes("oxides")
-        ? oxideSubtypes[nextNumber - 1]
-        : undefined;
+      // Agafem la categoria prevista per a aquest exercici.
+      const category = exerciseCategories[nextNumber - 1];
 
-      const newExercise = generateUniqueExercise(selectedCategories, {
+      const subtype =
+        category === "oxides" ? oxideSubtypes[nextNumber - 1] : undefined;
+
+      const newExercise = generateUniqueExercise([category], {
         oxideSubtype: subtype,
       });
 
@@ -154,13 +179,17 @@ function App() {
             <CardContent className="space-y-4">
               <div className="grid gap-3">
                 <div className="rounded-lg border p-4 text-center">
-                  <p className="text-2xl font-bold text-green-900">{sessionStats.correct}</p>
+                  <p className="text-2xl font-bold text-green-900">
+                    {sessionStats.correct}
+                  </p>
 
                   <p className="text-sm text-muted-foreground">Correctes</p>
                 </div>
 
                 <div className="rounded-lg border p-4 text-center">
-                  <p className="text-2xl font-bold text-yellow-800">{sessionStats.accent}</p>
+                  <p className="text-2xl font-bold text-yellow-800">
+                    {sessionStats.accent}
+                  </p>
 
                   <p className="text-sm text-muted-foreground">
                     Amb accentuació incorrecta
@@ -168,7 +197,9 @@ function App() {
                 </div>
 
                 <div className="rounded-lg border p-4 text-center">
-                  <p className="text-2xl font-bold text-red-900">{sessionStats.incorrect}</p>
+                  <p className="text-2xl font-bold text-red-900">
+                    {sessionStats.incorrect}
+                  </p>
 
                   <p className="text-sm text-muted-foreground">Incorrectes</p>
                 </div>
@@ -239,7 +270,10 @@ function App() {
 
             <CardContent className="space-y-8">
               <ModeSelector value={mode} onChange={setMode} />
-              <LengthSelector value={totalExercises} onChange={setTotalExercises}/>
+              <LengthSelector
+                value={totalExercises}
+                onChange={setTotalExercises}
+              />
 
               <CompoundSelector
                 selected={selectedCategories}
