@@ -1,10 +1,10 @@
 export const polyatomicIons = [
   {
-    formula: "BO3",
+    formula: "BO2", // or "BO3"
     name: "borat",
-    charge: -3,
+    charge: -1, // or "-3"
     acid: {
-      formula: "H3BO3",
+      formula: "HBO2", // or "H3BO3"
       name: "àcid bòric",
     },
   },
@@ -36,6 +36,16 @@ export const polyatomicIons = [
     acid: {
       formula: "HNO3",
       name: "àcid nítric",
+    },
+  },
+
+  {
+    formula: "SO2",
+    name: "hiposulfit",
+    charge: -2,
+    acid: {
+      formula: "H2SO2",
+      name: "àcid hiposulfurós",
     },
   },
 
