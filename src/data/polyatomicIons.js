@@ -1,14 +1,14 @@
 export const polyatomicIons = [
-  {
-    formula: "BO2", // or "BO3"
-    name: "borat",
-    charge: -1, // or "-3"
-    acid: {
-      formula: "HBO2", // or "H3BO3"
-      name: "àcid bòric",
-    },
-  },
-
+  // {
+  //   formula: "BO2", // or "BO3"
+  //   name: "borat",
+  //   charge: -1, // or "-3"
+  //   acid: {
+  //     formula: "HBO2", // or "H3BO3"
+  //     name: "àcid bòric",
+  //   },
+  // },
+  
   {
     formula: "CO3",
     name: "carbonat",
@@ -130,12 +130,33 @@ export const polyatomicIons = [
   },
 
   {
+    formula: "PO3",
+    name: "metafosfat",
+    charge: -1,
+    acid: {
+      formula: "HPO4",
+      name: "àcid metafosfòric",
+    },
+  },
+
+  {
     formula: "PO4",
     name: "fosfat",
     charge: -3,
     acid: {
       formula: "H3PO4",
       name: "àcid fosfòric",
+    },
+  },
+
+
+  {
+    formula: "MnO4",
+    name: "manganat",
+    charge: -2,
+    acid: {
+      formula: "H2MnO4",
+      name: "àcid mangànic",
     },
   },
 

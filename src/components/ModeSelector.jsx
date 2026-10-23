@@ -20,11 +20,11 @@ function ModeSelector({ value, onChange }) {
 
         <SelectContent>
           <SelectItem value="formula-to-name">
-            Molècula → nom
+            Compost → nom
           </SelectItem>
 
           <SelectItem value="name-to-formula">
-            Nom → molècula
+            Nom → compost 
           </SelectItem>
 
           <SelectItem value="random">

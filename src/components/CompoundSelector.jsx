@@ -2,11 +2,28 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { categories } from "@/data/categories";
 
 function CompoundSelector({ selected, onChange }) {
-  const toggleCategory = (id) => {
-    if (selected.includes(id)) {
-      onChange(selected.filter((category) => category !== id));
+  const toggleCategory = (cat) => {
+    if (selected.includes(cat.id)) {
+      // 1. Si ya está seleccionado, lo deseleccionamos.
+      // Si tiene children, filtramos también para quitar los IDs de los hijos.
+      let idsToRemove = [cat.id];
+      if (cat.children) {
+        const childrenIds = cat.children.map((child) => child.id);
+        idsToRemove = [...idsToRemove, ...childrenIds];
+      }
+
+      onChange(selected.filter((id) => !idsToRemove.includes(id)));
     } else {
-      onChange([...selected, id]);
+      // 2. Si no está seleccionado, lo añadimos
+      onChange([...selected, cat.id]);
+    }
+  };
+
+  const toggleChild = (childId) => {
+    if (selected.includes(childId)) {
+      onChange(selected.filter((id) => id !== childId));
+    } else {
+      onChange([...selected, childId]);
     }
   };
 
@@ -29,7 +46,7 @@ function CompoundSelector({ selected, onChange }) {
               <Checkbox
                 id={category.id}
                 checked={selected.includes(category.id)}
-                onCheckedChange={() => toggleCategory(category.id)}
+                onCheckedChange={() => toggleCategory(category)}
               />
 
               <label
@@ -50,7 +67,7 @@ function CompoundSelector({ selected, onChange }) {
                     <Checkbox
                       id={child.id}
                       checked={selected.includes(child.id)}
-                      onCheckedChange={() => toggleCategory(child.id)}
+                      onCheckedChange={() => toggleChild(child.id)}
                     />
 
                     <label
