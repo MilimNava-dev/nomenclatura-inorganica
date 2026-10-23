@@ -9,6 +9,7 @@ import { generateHydracid } from "./hydracids";
 import { generateOxoacid } from "./oxoacids";
 import { generateCommonName } from "./common";
 import { generatePeroxide } from "./peroxides";
+import { generateIons } from "./ions"
 
 export const generators = {
   common: generateCommonName,
@@ -25,4 +26,5 @@ export const generators = {
   "binary-salts": generateBinarySalt,
   hydracids: generateHydracid,
   oxoacids: generateOxoacid,
+  ions: generateIons,
 };

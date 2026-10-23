@@ -11,19 +11,55 @@ const subscriptMap = {
   9: "₉",
 };
 
-function toSubscript(number) {
-  return String(number)
+const superscriptMap = {
+  0: "⁰",
+  1: "¹",
+  2: "²",
+  3: "³",
+  4: "⁴",
+  5: "⁵",
+  6: "⁶",
+  7: "⁷",
+  8: "⁸",
+  9: "⁹",
+  "+": "⁺",
+  "-": "⁻",
+};
+
+function toSubscript(text) {
+  return String(text)
     .split("")
-    .map((digit) => subscriptMap[digit])
+    .map((digit) => subscriptMap[digit] || digit)
+    .join("");
+}
+
+function toSuperscript(text) {
+  return String(text)
+    .split("")
+    .map((char) => superscriptMap[char] || char)
     .join("");
 }
 
 function Formula({ formula }) {
-  const parts = formula.split(/(\d+)/);
+  // Expresión regular que divide el texto en:
+  // 1. Un signo (+ o -) seguido opcionalmente de números (ej: +, +2, -3) -> Superíndice
+  // 2. Números sueltos (ej: 2, 4) -> Subíndice
+  // 3. El resto de caracteres (letras, etc.) -> Texto normal
+  const parts = formula.match(/([+-]\d*|\d+|[^+\-\d]+)/g) || [];
 
   return (
     <>
       {parts.map((part, index) => {
+        // Si es un ion con signo delante (+, -, +2, -3...)
+        if (/^[+-]\d*$/.test(part)) {
+          return (
+            <sup key={index}>
+              {toSuperscript(part)}
+            </sup>
+          );
+        }
+
+        // Si es un número normal (subíndice de la molécula)
         if (/^\d+$/.test(part)) {
           return (
             <sub key={index}>
@@ -32,6 +68,7 @@ function Formula({ formula }) {
           );
         }
 
+        // Letras o símbolos normales
         return <span key={index}>{part}</span>;
       })}
     </>

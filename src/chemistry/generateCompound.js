@@ -11,6 +11,7 @@ import { generateTernarySalt } from "./generators/ternarySalts";
 import { generateHydrogenatedTernarySalt } from "./generators/hydrogenatedTernarySalts";
 import { generateCommonName } from "./generators/common";
 import { generatePeroxide } from "./generators/peroxides";
+import { generateIons } from "./generators/ions"
 import { randomItem } from "./utils";
 
 export function generateCompound(categories, options = {}) {
@@ -52,6 +53,9 @@ export function generateCompound(categories, options = {}) {
 
     case "hydrogen-ternary-salts":
       return generateHydrogenatedTernarySalt();
+
+    case "ions":
+      return generateIons();
 
     default:
       throw new Error(`No hi ha generador per a: ${category}`);

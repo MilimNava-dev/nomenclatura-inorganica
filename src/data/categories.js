@@ -41,4 +41,8 @@ export const categories = [
       },
     ],
   },
+  {
+    id: "ions",
+    label: "Ions",
+  },
 ];
