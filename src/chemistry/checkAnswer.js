@@ -47,6 +47,7 @@ function normalizeName(name) {
   return name
     .trim()
     .toLowerCase()
+    .replace(/[\u2018\u2019\u201B\u02BC\uFF07\u0060\u00B4]/g, "'")
     .replace(/\s+/g, " ");
 }
 
