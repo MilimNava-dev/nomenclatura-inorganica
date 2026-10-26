@@ -1,6 +1,7 @@
 import { elements } from "../../data/elements";
 import { peroxideMetals } from "../../data/compoundElements";
 import { randomItem } from "../utils";
+import { deElement } from "../catalan";
 
 export function generatePeroxide() {
   const symbol = randomItem(peroxideMetals);
@@ -10,7 +11,7 @@ export function generatePeroxide() {
   const formula =
     symbol + (metal.group === 1 ? "2" : "") + "O2";
 
-  const name = `peròxid de ${metal.name}`;
+  const name = `peròxid ${deElement(metal.name)}`;
 
   return {
     formula,

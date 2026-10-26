@@ -3,6 +3,7 @@ import { oxideMetals } from "../../data/compoundElements";
 import { randomItem } from "../utils";
 import { buildBinaryFormula } from "../generateFormula";
 import { stockName } from "../generateName";
+import { deElement } from "../catalan";
 
 export function generateMetalOxide() {
   const symbol = randomItem(oxideMetals);

@@ -134,7 +134,7 @@ export const polyatomicIons = [
     name: "metafosfat",
     charge: -1,
     acid: {
-      formula: "HPO4",
+      formula: "HPO3",
       name: "àcid metafosfòric",
     },
   },

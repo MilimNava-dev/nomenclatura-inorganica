@@ -14,6 +14,7 @@ export function generateIons () {
       : charge.toString()
   return {
     ...item,
+    name: "ió " + item.name,
     formula: item.formula + chargeStr,
     category: "ions"
   }
